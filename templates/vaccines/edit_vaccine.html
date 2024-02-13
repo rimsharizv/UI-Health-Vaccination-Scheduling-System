@@ -1,0 +1,71 @@
+<div class="modal fade" id="editVaccineModal{{vaccine.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Edit Vaccine</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'edit-vaccine' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vaccine_id"
+                      name="vaccine_id"
+                      value="{{vaccine.id}}"
+                      required
+                    />
+                  </div>
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    value="{{vaccine.name}}"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Company</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="company"
+                      name="company"
+                      value="{{vaccine.company}}"
+                      required
+                    />
+                  </div>
+                <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Dosage</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="dosage"
+                      name="dosage"
+                      value="{{vaccine.dosage_per_immunization}}"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="description"
+                      name="description"
+                      value="{{vaccine.description}}"
+                    />
+                  </div>         
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>

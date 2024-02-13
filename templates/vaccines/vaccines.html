@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Vaccines</h3>
+    </div>
+    {% if request.user.role == "admin" %}
+    <div class="col">
+        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newVaccineModal">New Vaccine</a>
+    </div>
+    {% endif %}
+    
+</div>
+<hr/>
+      <div class="table-responsive small">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Company</th>
+              <th scope="col">Dosage</th>
+              <th scope="col">Available</th>
+              <th scope="col">On Hold</th>
+              <th scope="col">Description</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for vaccine in page_obj %}
+            <tr>
+              <td>{{vaccine.id}}</td>
+              <td>{{vaccine.name}}</td>
+              <td>{{vaccine.company}}</td>
+              <td>{{vaccine.dosage_per_immunization}}</td>
+              <td>{{vaccine.quantity}}</td>
+              <td>{{vaccine.on_hold}}</td>
+              <td>{{vaccine.description}}</td>
+              {% if request.user.role == "admin" %}
+              <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editVaccineModal{{ vaccine.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a></td>
+              <td><a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#newVaccineDeliveryModal{{ vaccine.id }}">
+                <i class="bi bi-plus"></i>
+              </a></td>
+              {% endif %}
+    
+              {% include "vaccines/edit_vaccine.html" %}
+              {% include "vaccines/new_vaccine_delivery.html" %}
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              {% if page_obj.has_previous %}   
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+              {% endif %}
+              <a class="page-link" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+              {% if page_obj.has_next %}    
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+              {% endif %}   
+            </ul>
+          </nav>
+        </div>
+      </div>
+{% endblock content %}

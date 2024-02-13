@@ -1,0 +1,55 @@
+<div class="modal fade" id="newVaccineDeliveryModal{{vaccine.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">New Vaccine Delivery</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'new-delivery' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Vaccine</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    value="{{vaccine.name}}"
+                    readonly
+                    required
+                  />
+                </div>
+
+                <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Vaccine ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vaccine_id"
+                      name="vaccine_id"
+                      value="{{vaccine.id}}"
+                      readonly
+                      required
+                    />
+                  </div>
+                
+                  <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Quantity Delivered</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="amount"
+                      name="amount"
+                      required
+                    />
+                  </div>
+                 
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>
