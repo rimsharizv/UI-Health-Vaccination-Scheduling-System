@@ -1,0 +1,28 @@
+To be able to run this project, you will need Python and MySQL installed on your computer
+
+To install Python, go to https://python.org
+To install MySQL, go to https://www.mysql.com/downloads/
+
+Before your run the project, got to your MySQL server and create a database name vaccination
+your database user should be root and password should be empty
+
+
+After that, open your terminal/command prompt inside this folder
+Then run the following commands,
+1. pip install -r requirements.txt
+2. python manage.py migrate
+3. python manage.py createsuperuser (this command will request you for details of a user, provide them)
+4. python manage.py runserver
+
+After command 4, go to your browser and type: http://127.0.0.1:8000/admin
+Then login with user details you provided on command 3 above.
+When logged in, on the left tab, click, on users, you will see a user with the name you provided,
+click on that user, then scroll down you will see and option to set user role, select admin 
+Then click save.
+
+
+After doing the above, on your browser tab, type http://127.0.0.1:8000
+the proceed to carry you project instructions step by step 
+
+Please Note that,
+when you create a nurse the password is automatically set to 1234
