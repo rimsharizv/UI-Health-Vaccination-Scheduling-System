@@ -1,0 +1,56 @@
+<div class="modal fade" id="vaccinatePatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Vaccinate Patient</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'vaccinate-patient' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Patient</label>
+                  <select class="form-select" name="patient_id" id="patient_id">
+                    {% for patient in patients %}
+                        <option value="{{patient.id}}">{{patient.user.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Nurse ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nurse_id"
+                      name="nurse_id"
+                      value="{{request.user.id}}"
+                      required
+                      readonly
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Vaccine</label>
+                    <select class="form-select" name="vaccine_id" id="vaccine_id">
+                        {% for vaccine in vaccines %}
+                            <option value="{{vaccine.id}}">{{vaccine.name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Vaccination Slot</label>
+                    <select class="form-select" name="vaccine_schedule_id" id="vaccine_schedule_id">
+                        {% for vaccine_schedule in vaccine_schedules %}
+                            <option value="{{vaccine_schedule.id}}">{{vaccine_schedule}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  
+        
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>

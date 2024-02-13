@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Vaccination Records</h3>
+    </div>
+    {% if request.user.role == "nurse" %}
+    <div class="col">
+        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#vaccinatePatientModal">Vaccinate Patient</a>
+    </div>
+  {% endif %}
+</div>
+<hr/>
+      <div class="table-responsive small">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date Administered</th>
+              <th scope="col">Nurse</th>
+              <th scope="col">Patient</th>
+              <th scope="col">Vaccine</th>
+            
+            </tr>
+          </thead>
+          <tbody>
+            {% for vaccination in vaccinations %}
+            <tr>
+              <td>{{vaccination.id}}</td>
+              <td>{{vaccination.created}}</td>
+              <td>{{vaccination.nurse.user.name}}</td>
+              <td>{{vaccination.patient.user.name}}</td>
+              <td>{{vaccination.vaccine}}</td>
+               
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              {% if page_obj.has_previous %}   
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+              {% endif %}
+              <a class="page-link" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+              {% if page_obj.has_next %}    
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+              {% endif %}   
+            </ul>
+          </nav>
+        </div>
+      </div>
+{% endblock content %}
