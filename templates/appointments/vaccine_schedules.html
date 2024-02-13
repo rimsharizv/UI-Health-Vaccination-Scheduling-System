@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Sessions & Slots</h3>
+    </div>
+    {% if request.user.role == "admin" %}
+    <div class="col">
+        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newSlotModal">Add Slot</a>
+    </div>
+    {% endif %}
+
+</div>
+<hr/>
+<div class="row">
+{% for schedule in schedules %}
+<div class="card m-2" style="width: 18rem;">
+    <div class="card-header">
+       Vaccine: {{schedule.vaccine}}
+      </div>
+      <div class="card-body">
+        <p class="card-text">Date: {{schedule.session_date}}</p>
+        <p class="card-text">Available: {{schedule.available_slots}}</p>
+        <p class="card-text">On Hold: {{schedule.occupied_slots}}</p>
+
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal{{ schedule.id }}">Book</a>
+
+      </div>
+  </div>
+{% include "appointments/book_appointment.html" %}
+{% endfor %}
+</div>
+{% endblock content %}

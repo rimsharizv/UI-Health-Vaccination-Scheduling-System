@@ -1,0 +1,38 @@
+<div class="modal fade" id="newSlotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Add A Slot</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'new-session' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Vaccine</label>
+                  <select class="form-select" name="vaccine_id" id="vaccine_id">
+                    {% for vaccine in vaccines %}
+                        <option value="{{vaccine.id}}">{{vaccine.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-2">
+                    <label for="exampleInputPassword1" class="form-label">Slot Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="session_date"
+                      name="session_date"
+                      required
+                    />
+                  </div>
+                  
+         
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>

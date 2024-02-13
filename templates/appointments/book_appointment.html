@@ -1,0 +1,47 @@
+<div class="modal fade" id="bookAppointmentModal{{schedule.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Book Appointment</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'book-appointment' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="mb-2">
+                    <p>Vaccine: {{schedule.vaccine}}</p>
+                    <p>Date: {{schedule.session_date}}</p>
+                  </div>
+                <div class="mb-2">
+
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="session_id"
+                    name="session_id"
+                    value="{{schedule.id}}"
+                    hidden
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+ 
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="patient_id"
+                      name="patient_id"
+                      value="{{request.user.id}}"
+                      required
+                      hidden
+                    />
+                  </div>
+               
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>
