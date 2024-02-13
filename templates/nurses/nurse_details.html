@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h3>Nurse Details</h3>
+  </div>
+  {% if request.user.role == "nurse" %}
+  <div class="col">
+    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editNurseModal{{nurse.id}}">Edit Profile</a>
+  </div>
+  {% elif request.user.role == "admin" %}
+  <div class="col">
+    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adminEditNurseModal{{nurse.id}}">Edit Profile</a>
+  </div>
+  {% endif %}
+  <div class="col">
+    <a class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewNurseProfileModal{{nurse.id}}">View Profile</a>
+  </div>
+
+  {% include "nurses/edit_nurse.html" %}
+  {% include "nurses/admin_edit_nurse.html" %}
+  {% include "nurses/view_profile.html" %}
+
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <p>Name: {{nurse.user.name}}</p>
+        <p>SS Number: {{nurse.employeeId}}</p>
+    </div>
+    <div class="col">
+        <p>Total Vaccinations: {{vaccinations_count}}</p>
+        <p>Appointments Count: {{appointments_count}}</p>
+    </div>
+</div>
+<hr/>
+
+<div class="row">
+    
+    <div class="col">
+        <h5>Vaccination History</h5>
+        <div class="table-responsive small">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Date Vaccinated</th>
+                  <th scope="col">Patient</th>
+                  <th scope="col">Vaccine</th>
+                  <th scope="col">Slot</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for vaccination in vaccinations %}
+                <tr>
+                  <td>{{vaccination.id}}</td>
+                  <td>{{vaccination.created}}</td>
+                  <td>{{vaccination.patient}}</td>
+                  <td>{{vaccination.vaccine}}</td>
+                  <td>{{vaccination.vaccine_schedule}}</td>
+                </tr>
+              
+                {% endfor %}
+    
+              </tbody>
+            </table>
+          
+          </div>
+    </div>
+    <div class="col">
+        <h5>Appointments</h5>
+        <div class="table-responsive small">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Created</th>
+                  <th scope="col">Session</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for appointment in nurse_schedules %}
+                <tr>
+                  <td>{{appointment.id}}</td>
+                  <td>{{appointment.created}}</td>
+                  <td>{{appointment.vaccine_schedule}}</td>
+                  <td>{{appointment.status}}</td>
+                  {% if appointment.status == "Pending" %}
+                  <td><a class="btn btn-warning btn-sm" href="{% url 'cancel-nurse-schedule' appointment.id %}">Decline</a></td>
+                  {% endif %}
+                </tr>
+            
+                {% endfor %}
+    
+              </tbody>
+            </table>
+           
+          </div>
+    </div>
+
+</div>
+      
+{% endblock content %}

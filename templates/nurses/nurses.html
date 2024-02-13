@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Nurses</h3>
+    </div>
+    <div class="col">
+        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newNurseModal">Add Nurse</a>
+
+    </div>
+
+</div>
+<hr/>
+      <div class="table-responsive small">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Employee ID</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Age</th>
+              <th scope="col">Address</th>
+              <th scope="col" colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for nurse in page_obj %}
+            <tr>
+              <td>{{nurse.id}}</td>
+              <td>{{nurse.first_name}} {{nurse.last_name}}</td>
+              <td>{{nurse.employeeId}}</td>
+              <td>{{nurse.phone_number}}</td>
+              <td>{{nurse.gender}}</td>
+              <td>{{nurse.age}}</td>
+              <td>{{nurse.address}}</td>
+              <td>
+                <a href="{% url 'nurse-details' nurse.id %}" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
+              </td>
+              <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#scheduleNurseModal{{nurse.id}}">
+               Schedule
+              </a></td>
+              <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adminEditNurseModal{{ nurse.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a></td>
+              <td><a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteNurseModal{{ nurse.id }}">
+                <i class="bi bi-trash"></i>
+              </a></td>
+              
+            {% include "nurses/admin_edit_nurse.html" %}
+            {% include "nurses/delete_nurse.html" %}
+            {% include "appointments/schedule_nurse.html" %}
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              {% if page_obj.has_previous %}   
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+              {% endif %}
+              <a class="page-link" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+              {% if page_obj.has_next %}    
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+              {% endif %}   
+            </ul>
+          </nav>
+        </div>
+      </div>
+{% endblock content %}

@@ -1,0 +1,107 @@
+<div class="modal fade" id="adminEditNurseModal{{nurse.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-center">Edit Nurse Profile</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+          <form action="{% url 'admin-edit-nurse' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="modal-body">
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Nurse ID</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nurse_id"
+                    name="nurse_id"
+                    value="{{nurse.id}}"
+                    required
+                  />
+                </div>
+              <div class="mb-2">
+                <label for="exampleInputPassword1" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first_name"
+                  name="first_name"
+                  value="{{nurse.first_name}}"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    name="last_name"
+                    value="{{nurse.last_name}}"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Employee ID</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="employee_id"
+                    name="employee_id"
+                    value="{{nurse.employeeId}}"
+                    required
+                  />
+                </div>
+               
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="{{nurse.user.email}}"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    value="{{nurse.user.username}}"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label for="exampleInputPassword1" class="form-label">Age</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="age"
+                    name="age"
+                    value="{{nurse.age}}"
+                    required
+                  />
+                </div>
+               
+                
+                <div class="mb-2">
+                  <label class="form-label">Gender</label>
+                  <select class="form-select" id="gender" name="gender" value="{{nurse.age}}">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+  
+                    </select>
+                </div>
+       
+              <div class="text-center mt-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+            </form>
+    </div>
+  </div>
+</div>
