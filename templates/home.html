@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="card m-2" style="width: 16rem; height: 150px;">
+        <div class="card-body">
+          <h5 class="card-title">Nurses</h5>
+          <hr/>
+          <p class="card-text">Nurses Count: {{nurses_count}}</p>
+          <a href="#"></a>
+        </div>
+      </div>
+      <div class="card m-2" style="width: 16rem; height: 150px;">
+       
+        <div class="card-body">
+          <h5 class="card-title">Patients</h5>
+          <hr/>
+          <p class="card-text">Patients Count: {{patients_count}}</p>
+        </div>
+      </div>
+      <div class="card m-2" style="width: 16rem; height: 150px;">
+        <div class="card-body">
+          <h5 class="card-title">Vaccines Recorded</h5>
+          <hr/>
+          <p class="card-text">Vaccines Count: {{vaccines_count}}</p>
+         
+        </div>
+      </div>
+  </div>
+{% endblock %}
