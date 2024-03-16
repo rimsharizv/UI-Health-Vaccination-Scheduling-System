@@ -11,7 +11,7 @@ The UI Health Hospital Vaccination Scheduling System is a comprehensive solution
 
 ## Technical Stack:
 - Backend: Django, Python
-- Frontend: HTML, CSS (Bootstrap)
+- Frontend: HTML, CSS
 - Database: MySQL
 
 ##  Setup:
